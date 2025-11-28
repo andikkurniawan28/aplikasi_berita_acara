@@ -4,13 +4,14 @@
 
         <h6 class="fw-bold mb-2">Control Panel</h6>
 
-        <div class="mb-1">
-            <label class="form-label form-label-sm">Kode Nomor Dokumen</label>
-            <input type="number" id="kodeNomorDokumen" class="form-control form-control-sm"
-                placeholder="000" min="1" max="999" oninput="generatePreview()" name="kodeNomorDokumen">
-        </div>
-
-        <label class="form-label form-label-sm mt-2">Master Dokumen</label>
+        <div class="row">
+            <div class="col-6 mb-1">
+                <label class="form-label form-label-sm">Kode Nomor Dokumen</label>
+                <input type="number" id="kodeNomorDokumen" class="form-control form-control-sm"
+                    placeholder="000" min="1" max="999" oninput="generatePreview()" name="kodeNomorDokumen">
+            </div>
+            <div class="col-6 mb-1">
+                <label class="form-label form-label-sm">Master Dokumen</label>
         <select id="dokumen_id" name="dokumen_id" class="form-select form-select-sm mb-1" required>
             @foreach ($dokumens as $d)
                 <option value="{{ $d->id }}" data-judul="{{ $d->judul }}"
@@ -24,6 +25,9 @@
                 </option>
             @endforeach
         </select>
+            </div>
+        </div>
+
 
         <label class="form-label form-label-sm">Kasus</label>
         <select id="kasus_id" name="kasus_id" class="form-select form-select-sm mb-1" required>

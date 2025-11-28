@@ -7,59 +7,59 @@ use Illuminate\Http\Request;
 
 class MaterialController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $material = Material::latest()->get();
+        return view('material.index', compact('material'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('material.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255|unique:materials,name',
+        ]);
+
+        Material::create([
+            'name' => $request->name
+        ]);
+
+        return redirect()->route('material.index')
+            ->with('success', 'Material berhasil ditambahkan.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Material $material)
+    public function edit($id)
     {
-        //
+        $material = Material::findOrFail($id);
+        return view('material.edit', compact('material'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Material $material)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => "required|string|max:255|unique:materials,name,$id",
+        ]);
+
+        $material = Material::findOrFail($id);
+
+        $material->update([
+            'name' => $request->name
+        ]);
+
+        return redirect()->route('material.index')
+            ->with('success', 'Material berhasil diperbarui.');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Material $material)
+    public function destroy($id)
     {
-        //
-    }
+        $material = Material::findOrFail($id);
+        $material->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Material $material)
-    {
-        //
+        return redirect()->route('material.index')
+            ->with('success', 'Material berhasil dihapus.');
     }
 }

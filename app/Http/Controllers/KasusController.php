@@ -7,59 +7,64 @@ use Illuminate\Http\Request;
 
 class KasusController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $kasuss = Kasus::latest()->get();
+        return view('kasus.index', compact('kasuss'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('kasus.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'kronologi' => 'required|string',
+        ]);
+
+        Kasus::create([
+            'nama' => $request->nama,
+            'kronologi' => $request->kronologi
+        ]);
+
+        return redirect()->route('kasuss.index')->with('success', 'Kasus berhasil ditambahkan.');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Kasus $kasus)
     {
-        //
+        return view('kasus.show', compact('kasus'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Kasus $kasus)
+    public function edit($id)
     {
-        //
+        $kasus = Kasus::findOrFail($id);
+        return view('kasus.edit', compact('kasus'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Kasus $kasus)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'kronologi' => 'required|string',
+        ]);
+
+        $kasus = Kasus::findOrFail($id);
+
+        $kasus->update([
+            'nama' => $request->nama,
+            'kronologi' => $request->kronologi
+        ]);
+
+        return redirect()->route('kasuss.index')->with('success', 'Kasus berhasil diperbarui.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Kasus $kasus)
+    public function destroy($id)
     {
-        //
+        $kasus = Kasus::findOrFail($id);
+        $kasus->delete();
+        return redirect()->route('kasuss.index')->with('success', 'Kasus berhasil dihapus.');
     }
 }

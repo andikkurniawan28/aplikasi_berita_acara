@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\JenisKendaraanController;
+use App\Http\Controllers\KasusController;
+use App\Http\Controllers\MaterialController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +23,6 @@ Route::post('/home/process', [HomeController::class, 'process'])->name('home.pro
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginProcess'])->name('login_process');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::resource('/kasuss', KasusController::class)->middleware(['auth']);
+Route::resource('/jenis_kendaraan', JenisKendaraanController::class)->middleware(['auth']);
+Route::resource('/material', MaterialController::class)->middleware(['auth']);

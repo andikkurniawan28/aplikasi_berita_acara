@@ -16,38 +16,34 @@
             <ul class="navbar-nav me-auto">
 
                 <!-- HOME -->
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link"
                         href="{{ route('home.index') }}">
                         Home
                     </a>
-                </li>
+                </li> --}}
 
-                <!-- MASTER KASUS -->
                 <li class="nav-item">
                     <a class="nav-link"
-                        href="">
+                        href="{{ route('kasuss.index') }}">
                         Kasus
                     </a>
                 </li>
 
-                <!-- MASTER JENIS KENDARAAN -->
                 <li class="nav-item">
                     <a class="nav-link"
-                        href="">
+                        href="{{ route('jenis_kendaraan.index') }}">
                         Jenis Kendaraan
                     </a>
                 </li>
 
-                <!-- MASTER MATERIAL -->
                 <li class="nav-item">
                     <a class="nav-link"
-                        href="">
+                        href="{{ route('material.index') }}">
                         Material
                     </a>
                 </li>
 
-                <!-- MASTER MATERIAL -->
                 <li class="nav-item">
                     <a class="nav-link"
                         href="{{ route('logout') }}">

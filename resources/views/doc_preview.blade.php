@@ -42,8 +42,9 @@
         </div>
     </div>
 
-    <div class="credit-text text-center">
-        <br>
-        ©2025-Andik Kurniawan
-    </div>
+    <footer class="text-center fixed-bottom bg-light py-2 shadow-sm">
+        <div class="credit-text">
+            ©2025 - Andik Kurniawan
+        </div>
+    </footer>
 </div>
